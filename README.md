@@ -15,10 +15,16 @@ PC 에서 `딸깍.exe` 를 켜 두고, 폰으로 QR 을 찍거나 PIN 6자리를
 
 시간 · 단계 · 고를 수 있는 챔피언은 전부 롤 클라이언트가 보낸 값을 그대로 씁니다.
 
+## 설치
+
+[Releases](https://github.com/tenkojun/ttalkkak/releases/latest) 에서 **`ttalkkak-setup.exe`** 를 받아 실행하면 바로 설치됩니다 (관리자 권한 필요 없음).
+서명 안 된 프로그램이라 "Windows의 PC 보호" 창이 뜨면 **추가 정보 → 실행** 을 누르세요.
+지우기: 설정 → 앱 → 딸깍 → 제거.
+
 ## 쓰는 법
 
 1. PC 에서 롤 클라이언트를 켜고 로그인합니다.
-2. `딸깍.exe` 를 실행하고 비밀번호를 넣습니다.
+2. 바탕화면의 **딸깍** 을 실행하고 비밀번호를 넣습니다.
 3. 창에 뜬 QR 을 폰 카메라로 찍거나, 폰에서 주소를 열고 PIN 6자리를 넣습니다.
 
 폰이 데이터, PC 가 PC방 유선이어도 중계 서버(Cloudflare Workers)를 거쳐 연결됩니다.
@@ -31,6 +37,7 @@ npm test                 # 가짜 롤(mock-lcu)로 자체 시험
 npm run mock             # 가짜 롤 클라이언트
 npm run agent:mock       # 가짜 롤에 붙는 에이전트
 npm run build            # dist/딸깍.exe (Node SEA, Windows)
+npm run setup            # dist/ttalkkak-setup.exe (Inno Setup 6 필요)
 ```
 
 - `agent/` — PC 에이전트. 롤 클라이언트 로컬 API(LCU)에 붙고, 폰 명령은 `agent/lcu.js` 의 허용 목록만 통과시킵니다.
