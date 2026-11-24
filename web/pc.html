@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>딸깍</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="img/devil-cut.png">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Cinzel:wght@400&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* PC 창 (Edge 앱 창 420×680). 폰 화면과 같은 검정 + 짙은 빨강 */
+:root{--red:#b3191f;--btn:#47100f;--white:#efebe6;--dim:#8c8c8c;--dim2:#5f5f5f}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:#000;color:var(--white);font-family:'Noto Serif KR',serif;font-weight:300;overflow:hidden;user-select:none}
+main{height:100%;display:flex;flex-direction:column;align-items:center;padding:34px 30px 22px;position:relative}
+.logo{font-size:44px;font-weight:400;letter-spacing:.06em;line-height:1}
+.tag{font-family:'Cinzel',serif;color:var(--red);font-size:10px;letter-spacing:.42em;margin-top:10px}
+.devil{width:30px;margin:16px 0 0;filter:drop-shadow(0 0 10px #b3191f55)}
+section{display:none;width:100%;flex:1;flex-direction:column;align-items:center}
+section.on{display:flex;animation:in .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;translate:0 10px}}
+.label{color:var(--dim);font-size:12px;letter-spacing:.12em;margin:30px 0 12px}
+input{width:100%;background:#0b0909;border:1px solid #3a3636;color:var(--white);font:inherit;font-size:17px;padding:14px;text-align:center;outline:none;letter-spacing:.06em}
+input:focus{border-color:var(--red)}
+input{user-select:text;-webkit-user-select:text;-webkit-text-fill-color:#efebe6;caret-color:#efebe6;font-family:system-ui,'Malgun Gothic',sans-serif!important;opacity:1}
+button{width:100%;background:var(--btn);border:0;color:var(--white);font:inherit;font-size:15px;letter-spacing:.3em;padding:16px;margin-top:14px;cursor:pointer}
+button:hover{filter:brightness(1.25)}
+.err{color:#e0464e;font-size:12px;height:18px;margin-top:10px}
+.qr{width:200px;height:200px;margin-top:22px;padding:10px;border:1px solid #2a2626;background:#050404}
+.qr svg{width:100%;height:100%;display:block}
+.pin{display:flex;gap:7px;margin-top:20px}
+.pin b{width:38px;height:50px;border:1px solid #3a3636;display:grid;place-items:center;font-family:'Bodoni Moda',serif;font-weight:400;font-size:28px;font-variation-settings:'opsz' 20}
+.pin b:nth-child(3){margin-right:10px}
+.url{color:var(--dim);font-size:11px;margin-top:14px;letter-spacing:.02em;word-break:break-all;text-align:center;cursor:pointer}
+.url:hover{color:var(--white)}
+.status{margin-top:auto;width:100%;border-top:1px solid #1d1d1d;padding-top:14px;display:grid;grid-template-columns:auto 1fr;gap:7px 14px;font-size:12px;color:var(--dim)}
+.status span:nth-child(even){color:var(--white);text-align:right}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#5f5f5f;margin-right:7px;vertical-align:1px}
+.dot.on{background:#e0303a;box-shadow:0 0 8px #e0303a}
+/* 비밀번호 화면: 창 높이에 맞춰 가운데로 넓게 */
+main:has(#lock.on){justify-content:center;gap:2vh}main:has(#lock.on) .logo{font-size:clamp(44px,9vh,76px)}main:has(#lock.on) .tag{font-size:clamp(10px,1.6vh,14px)}main:has(#lock.on) .devil{width:clamp(30px,6vh,54px);margin-top:3vh}
+#lock{flex:0 0 auto;max-width:520px}#lock .label{font-size:clamp(12px,2vh,16px);margin:5vh 0 1.6vh}#lock input{font-size:clamp(17px,3vh,24px);padding:2.2vh 14px}#lock button{font-size:clamp(15px,2.4vh,19px);padding:2.4vh 16px;margin-top:2vh}#lock .err{font-size:clamp(12px,1.9vh,15px)}
+.credit{position:absolute;bottom:6px;left:0;right:0;text-align:center;font-size:9px;letter-spacing:.2em;color:#3d3d3d}
+</style>
+</head>
+<body>
+<main>
+  <div class="logo">딸깍</div>
+  <div class="tag">MATCH. CLICK. DOMINATE.</div>
+  <img class="devil" src="img/devil-cut.png" alt="">
+
+  <section id="lock" class="on">
+    <div class="label">비밀번호</div>
+    <input id="pw" type="text" autocomplete="off" spellcheck="false" autofocus>
+    <button id="go">시작</button>
+    <div class="err" id="err"></div>
+  </section>
+
+  <section id="ready">
+    <div class="qr" id="qr"></div>
+    <div class="label" style="margin:16px 0 0">폰 카메라로 QR · 또는 아래 PIN</div>
+    <div class="pin" id="pin"></div>
+    <div class="url" id="url" title="눌러서 복사"></div>
+    <div class="status">
+      <span><i class="dot" id="d1"></i>롤</span><span id="lol">기다리는 중</span>
+      <span>상태</span><span id="phase">-</span>
+      <span><i class="dot" id="d2"></i>폰</span><span id="phones">0대</span>
+      <span><i class="dot" id="d3"></i>중계</span><span id="relay">-</span>
+    </div>
+  </section>
+  <div class="credit">by 개발 정준화</div>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const LABEL = { None: '대기', Lobby: '로비', Matchmaking: '매칭 찾는 중', ReadyCheck: '매칭 잡힘!', ChampSelect: '챔피언 선택', InProgress: '게임 중', GameStart: '게임 시작', EndOfGame: '게임 끝' };
+let ws;
+function connect() {
+  ws = new WebSocket(`ws://${location.host}/pcws`);
+  ws.onmessage = e => {
+    const m = JSON.parse(e.data);
+    if (m.t === 'unlock') {
+      if (!m.ok) { $('err').textContent = (m.why || '틀렸습니다') + ' (' + $('pw').value.length + '글자)'; $('pw').value = ''; $('pw').focus(); return; }
+    }
+    if (m.t === 'pc') {
+      if (!m.unlocked) return;
+      $('lock').classList.remove('on'); $('ready').classList.add('on');
+      $('qr').innerHTML = m.qr;
+      $('pin').innerHTML = [...m.pin].map(d => `<b>${d}</b>`).join('');
+      $('url').textContent = m.url;
+      $('lol').textContent = m.lol ? '연결됨' : '롤을 켜 주세요'; $('d1').classList.toggle('on', m.lol);
+      $('phase').textContent = m.lol ? (LABEL[m.phase] ?? m.phase) : '-';
+      $('phones').textContent = m.phones + '대'; $('d2').classList.toggle('on', m.phones > 0);
+      $('relay').textContent = m.relay ? '연결됨 (데이터 OK)' : '연결 중'; $('d3').classList.toggle('on', m.relay);
+    }
+  };
+  ws.onclose = () => { // 프로그램이 다시 켜지면 새 화면으로 (옛 창이 옛 화면에 남던 것)
+    const wait = () => fetch('/pc.html', { cache: 'no-store' }).then(() => location.reload(), () => setTimeout(wait, 1000));
+    setTimeout(wait, 1000);
+  };
+}
+connect();
+const unlock = () => ws.send(JSON.stringify({ t: 'unlock', pw: $('pw').value }));
+$('go').onclick = unlock;
+$('pw').onkeydown = e => e.key === 'Enter' && unlock();
+$('url').onclick = () => navigator.clipboard?.writeText($('url').textContent);
+</script>
+</body>
+</html>

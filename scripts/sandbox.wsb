@@ -1,0 +1,11 @@
+<Configuration>
+  <!-- 깨끗한 Windows 에서 딸깍.exe 시험: 더블클릭 → 샌드박스 바탕화면의 dist 폴더에서 딸깍.exe 실행 -->
+  <MappedFolders>
+    <MappedFolder>
+      <HostFolder>C:\Users\TENKO_\tenko_develop\ttalkkak\dist</HostFolder>
+      <SandboxFolder>C:\Users\WDAGUtilityAccount\Desktop\dist</SandboxFolder>
+      <ReadOnly>true</ReadOnly>
+    </MappedFolder>
+  </MappedFolders>
+  <Networking>Enable</Networking>
+</Configuration>

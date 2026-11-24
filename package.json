@@ -1,0 +1,23 @@
+{
+    "name":  "ttalkkak",
+    "version":  "0.1.0",
+    "description":  "?멸퉵 ??留ㅼ묶 ?≪븘?쇰쭔 ?쒕떎. PC諛??먮━ 鍮꾩슫 ?ъ씠 ?곗쑝濡?濡?留ㅼ묶 ?섎씫쨌諛댄뵿",
+    "type":  "module",
+    "private":  true,
+    "scripts":  {
+                    "mock":  "node mock-lcu/server.js",
+                    "agent":  "node agent/main.js",
+                    "agent:mock":  "node agent/main.js --mock",
+                    "test":  "node test/selfcheck.js",
+                    "build":  "node scripts/build.mjs",
+                    "app":  "node agent/main.js --gui"
+                },
+    "dependencies":  {
+                         "qrcode":  "^1.5.4",
+                         "ws":  "^8.18.0"
+                     },
+    "devDependencies":  {
+                            "esbuild":  "^0.25.10",
+                            "postject":  "^1.0.0-alpha.6"
+                        }
+}

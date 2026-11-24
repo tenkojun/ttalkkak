@@ -1,0 +1,12 @@
+node_modules/
+dist/
+relay/.wrangler/
+mock-lcu/lockfile
+test/.pw
+# 개발 메모 · 시안 · 기록 (개인 정보 · 상표 포함)
+state/
+design/
+CLAUDE.md
+.claude/
+*.log
+*.jsonl
